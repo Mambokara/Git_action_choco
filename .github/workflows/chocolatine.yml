@@ -11,7 +11,6 @@ env:
     MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-MLH-2-1-chocolatine-corentin.bergaentzle.git"
     EXECUTABLES: "mysh"
 
-
 jobs:
   check_coding_style:
       runs-on: ubuntu-latest
@@ -41,3 +40,24 @@ jobs:
               else
                   echo No coding style errors
               fi
+
+  check_program_compilation:
+    needs: [check_coding_style]
+    runs-on: ubuntu-latest
+    name: "Check if the program compile"
+    container: epitechcontent/epitest-docker:latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - id: check_program_compilation
+        run: make
+        timeout-minutes: 2
+      - run: make clean
+      - run: |
+          OIFS=$IFS
+          IFS=','
+          for exec in $EXECUTABLES
+            do
+              ./$exec
+            done
+          IFS=$OIFS
