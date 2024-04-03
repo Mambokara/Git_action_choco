@@ -1,0 +1,43 @@
+name: chocolatine
+on:
+    push:
+        branches-ignore:
+            - "ga-ignore-*"
+    pull_request:
+        branches-ignore:
+            - "ga-ignore-*"
+
+env:
+    MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-MLH-2-1-chocolatine-corentin.bergaentzle.git"
+    EXECUTABLES: "mysh"
+
+
+jobs:
+  check_coding_style:
+      runs-on: ubuntu-latest
+      name: "Check the coding style"
+      container: ghcr.io/epitech/coding-style-checker:latest
+      steps:
+          - name: Extract all the files with Checkout
+            uses: actions/checkout@v4
+            with:
+              fetch-depth: 0
+          - id: check_coding_style
+            run: |
+              check.sh $(pwd) $(pwd)
+              ERROR_VAR=$(cat $(pwd)/coding-style-reports.log)
+              OIFS=$IFS
+              IFS=$'\n'
+              for ERROR in $ERROR_VAR; do
+                  file1=($(echo "$ERROR" | cut -d ':' -f 1))
+                  file3=($(echo "$ERROR" | cut -d ':' -f 3))
+                  file4=($(echo "$ERROR" | cut -d ':' -f 4))
+                  echo "::error file=$file1,title=$file3 coding style errors detected::$file4"
+              done
+              IFS=$OIFS
+              if [[ -n $ERROR_VAR ]]
+              then
+                  exit 1
+              else
+                  echo No coding style errors
+              fi
