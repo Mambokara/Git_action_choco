@@ -61,3 +61,15 @@ jobs:
               ./$exec
             done
           IFS=$OIFS
+
+  run_tests:
+    needs: [check_program_compilation]
+    runs-on: ubuntu-latest
+    name: "Launch the tests"
+    container: epitechcontent/epitest-docker:latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - id: run_tests
+        run: make tests_run
+        timeout-minutes: 2
