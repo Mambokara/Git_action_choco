@@ -13,7 +13,7 @@ env:
 
 jobs:
   check_coding_style:
-      if: ${{ github.repository != 'EpitechPromo2028/B-DOP-200-MLH-2-1-chocolatine-corentin.bergaentzle.git'}}
+      if: ${{ github.repository != 'EpitechPromo2028/B-DOP-200-MLH-2-1-chocolatine-corentin.bergaentzle'}}
       runs-on: ubuntu-latest
       name: "Check the coding style"
       container: ghcr.io/epitech/coding-style-checker:latest
