@@ -8,7 +8,7 @@ on:
             - "ga-ignore-*"
 
 env:
-    ACTUAL_URL: git@github.com:${github.repository}.git
+    ACTUAL_URL: git@github.com:${GITHUB_REPOSITORY}.git
     MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-MLH-2-1-chocolatine-corentin.bergaentzle.git"
     EXECUTABLES: "mysh"
 
