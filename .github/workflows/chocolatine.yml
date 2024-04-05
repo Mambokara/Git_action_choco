@@ -30,9 +30,10 @@ jobs:
               IFS=$'\n'
               for ERROR in $ERROR_VAR; do
                   file1=($(echo "$ERROR" | cut -d ':' -f 1))
+                  file2=($(echo "$ERROR" | cut -d ':' -f 2))
                   file3=($(echo "$ERROR" | cut -d ':' -f 3))
                   file4=($(echo "$ERROR" | cut -d ':' -f 4))
-                  echo "::error file=$file1,title=$file3 coding style errors detected::$file4"
+                  echo "::error file=$file1,title=$file3 coding style errors detected::$file4#L$file2"
               done
               IFS=$OLDIFS
               if [[ -n $ERROR_VAR ]]
