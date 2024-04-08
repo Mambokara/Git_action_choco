@@ -16,15 +16,15 @@ void set_oldpwd(minishell_t *mysh)
 {
     char *pos = get_pos(mysh->env);
 
-    my_setenv("OLDPWD", &pos[4], mysh);
+    //my_setenv("OLDPWD", &pos[4], mysh);
 }
 
 void set_newpwd(minishell_t *mysh)
 {
-    int pos_newpwd = get_position(mysh->env);
-    char *buffer = malloc(sizeof(char) * PATH_MAX);
-    char *newpwd;
-
-    getcwd(buffer, PATH_MAX);
-    my_setenv("PWD", buffer, mysh);
+    //int pos_newpwd = get_position(mysh->env);
+    //char *buffer = malloc(sizeof(char) * PATH_MAX);
+    //char *newpwd;
+//
+    //getcwd(buffer, PATH_MAX);
+    //my_setenv("PWD", buffer, mysh);
 }
